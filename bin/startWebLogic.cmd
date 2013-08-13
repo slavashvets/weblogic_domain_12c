@@ -77,7 +77,7 @@ GOTO :EOF
 
 @REM Call setDomainEnv here.
 
-set DOMAIN_HOME=C:\Oracle\Middleware\user_projects\domains\ecare_dev
+cd %DOMAIN_HOME%
 for %%i in ("%DOMAIN_HOME%") do set DOMAIN_HOME=%%~fsi
 
 call "%DOMAIN_HOME%\bin\setDomainEnv.cmd" %*

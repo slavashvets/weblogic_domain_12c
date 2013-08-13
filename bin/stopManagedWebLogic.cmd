@@ -69,7 +69,10 @@ if "%1"=="" (
 	shift
 )
 
-set DOMAIN_HOME=C:\Oracle\Middleware\user_projects\domains\ecare_dev
+if "%DOMAIN_HOME%"=="" (
+	@echo [ERROR] %%DOMAIN_HOME%% is not defined
+	EXIT /B
+)
 
 call "%DOMAIN_HOME%\bin\stopWebLogic.cmd" %1 %2
 

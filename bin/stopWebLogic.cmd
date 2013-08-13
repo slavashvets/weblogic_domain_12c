@@ -40,7 +40,11 @@ if NOT "%1"=="" (
 
 @REM Call setDomainEnv here because we want to have shifted out the environment vars above
 
-set DOMAIN_HOME=C:\Oracle\Middleware\user_projects\domains\ecare_dev
+if "%DOMAIN_HOME%"=="" (
+	@echo [ERROR] %%DOMAIN_HOME%% is not defined
+	EXIT /B
+)
+
 for %%i in ("%DOMAIN_HOME%") do set DOMAIN_HOME=%%~fsi
 
 @REM Read the environment variable from the console.

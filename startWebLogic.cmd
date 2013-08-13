@@ -5,7 +5,7 @@
 
 SETLOCAL
 
-set DOMAIN_HOME=C:\Oracle\Middleware\user_projects\domains\ecare_dev
+set DOMAIN_HOME=%~dp0
 
 call "%DOMAIN_HOME%\bin\startWebLogic.cmd" %*
 

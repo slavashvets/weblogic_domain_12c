@@ -33,23 +33,24 @@
 @REM (http://download.oracle.com/docs/cd/E24329_01/web.1211/e21048/overview.htm).
 @REM *************************************************************************
 
-set WL_HOME=C:\Oracle\Middleware\wlserver_12.1
+if "%WL_HOME%"=="" (
+	@echo [ERROR] %%WL_HOME%% is not defined
+	EXIT /B
+)
+
+if "%JAVA_HOME%"=="" (
+	@echo [ERROR] %%JAVA_HOME%% is not defined
+	EXIT /B
+)
+
+if "%DOMAIN_HOME%"=="" (
+	@echo [ERROR] %%DOMAIN_HOME%% is not defined
+	EXIT /B
+)
+
 for %%i in ("%WL_HOME%") do set WL_HOME=%%~fsi
 
-set BEA_JAVA_HOME=C:\Program Files\Java\jrockit-jdk1.6.0_37-R28.2.5-4.1.0
-
-set SUN_JAVA_HOME=
-
-if "%JAVA_VENDOR%"=="Oracle" (
-	set JAVA_HOME=%BEA_JAVA_HOME%
-) else (
-	if "%JAVA_VENDOR%"=="Sun" (
-		set JAVA_HOME=%SUN_JAVA_HOME%
-	) else (
-		set JAVA_VENDOR=Oracle
-		set JAVA_HOME=C:\Program Files\Java\jrockit-jdk1.6.0_37-R28.2.5-4.1.0
-	)
-)
+set JAVA_VENDOR=Oracle
 
 @REM We need to reset the value of JAVA_HOME to get it shortened AND 
 @REM we can not shorten it above because immediate variable expansion will blank it
@@ -59,10 +60,9 @@ for %%i in ("%JAVA_HOME%") do set JAVA_HOME=%%~fsi
 
 set SAMPLES_HOME=%WL_HOME%\samples
 
-set DOMAIN_HOME=C:\Oracle\Middleware\user_projects\domains\ecare_dev
 for %%i in ("%DOMAIN_HOME%") do set DOMAIN_HOME=%%~fsi
 
-set LONG_DOMAIN_HOME=C:\Oracle\Middleware\user_projects\domains\ecare_dev
+set LONG_DOMAIN_HOME=%DOMAIN_HOME%
 
 if "%DEBUG_PORT%"=="" (
 	set DEBUG_PORT=8453
@@ -154,19 +154,8 @@ if "%PRODUCTION_MODE%"=="true" (
 
 call "%WL_HOME%\common\bin\commEnv.cmd"
 
-set WLS_HOME=%WL_HOME%\server
-
-if "%JAVA_VENDOR%"=="Sun" (
-	set WLS_MEM_ARGS_64BIT=-Xms256m -Xmx512m
-	set WLS_MEM_ARGS_32BIT=-Xms256m -Xmx512m
-) else (
-	set WLS_MEM_ARGS_64BIT=-Xms512m -Xmx512m
-	set WLS_MEM_ARGS_32BIT=-Xms512m -Xmx512m
-)
-
-set MEM_ARGS_64BIT=%WLS_MEM_ARGS_64BIT%
-
-set MEM_ARGS_32BIT=%WLS_MEM_ARGS_32BIT%
+set MEM_ARGS_64BIT=-Xms512m -Xmx512m
+set MEM_ARGS_32BIT=-Xms512m -Xmx512m
 
 if "%JAVA_USE_64BIT%"=="true" (
 	set MEM_ARGS=%MEM_ARGS_64BIT%
@@ -220,7 +209,7 @@ if NOT "%USER_MEM_ARGS%"=="" (
 	set MEM_ARGS=%USER_MEM_ARGS%
 )
 
-set JAVA_PROPERTIES=-Dplatform.home=%WL_HOME% -Dwls.home=%WLS_HOME% -Dweblogic.home=%WLS_HOME% 
+set JAVA_PROPERTIES=-Dplatform.home=%WL_HOME% -Dwls.home=%WL_HOME%\server -Dweblogic.home=%WL_HOME%\server 
 
 @REM  To use Java Authorization Contract for Containers (JACC) in this domain, 
 @REM  please uncomment the following section. If there are multiple machines in 

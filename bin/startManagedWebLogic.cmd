@@ -56,7 +56,7 @@ set WLS_PW=
 
 @REM  set JAVA_OPTIONS=-Dweblogic.attribute=value -Djava.attribute=value
 
-set JAVA_OPTIONS=-Dweblogic.security.SSL.trustedCAKeyStore="C:\Oracle\Middleware\wlserver_12.1\server\lib\cacerts" %JAVA_OPTIONS%
+set JAVA_OPTIONS=-Dweblogic.security.SSL.trustedCAKeyStore==%WL_HOME%\server\lib\cacerts %JAVA_OPTIONS%
 
 @REM  Set JAVA_VM to the java virtual machine you want to run.  For instance:
 
@@ -96,7 +96,10 @@ set ADMIN_URL=%ADMIN_URL%
 
 set SERVER_NAME=%SERVER_NAME%
 
-set DOMAIN_HOME=C:\Oracle\Middleware\user_projects\domains\ecare_dev
+if "%DOMAIN_HOME%"=="" (
+	@echo [ERROR] %%DOMAIN_HOME%% is not defined
+	EXIT /B
+)
 
 if "%1"=="" (
 	@REM  Call Weblogic Server with our default params since the user did not specify any other ones
