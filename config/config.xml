@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain xsi:schemaLocation="http://xmlns.oracle.com/weblogic/security/wls http://xmlns.oracle.com/weblogic/security/wls/1.0/wls.xsd http://xmlns.oracle.com/weblogic/domain http://xmlns.oracle.com/weblogic/1.0/domain.xsd http://xmlns.oracle.com/weblogic/security http://xmlns.oracle.com/weblogic/1.0/security.xsd http://xmlns.oracle.com/weblogic/security/xacml http://xmlns.oracle.com/weblogic/security/xacml/1.0/xacml.xsd" xmlns="http://xmlns.oracle.com/weblogic/domain" xmlns:sec="http://xmlns.oracle.com/weblogic/security" xmlns:wls="http://xmlns.oracle.com/weblogic/security/wls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>ecare_dev</name>
+  <domain-version>12.1.1.0</domain-version>
+  <security-configuration xmlns:xacml="http://xmlns.oracle.com/weblogic/security/xacml" xmlns:pas="http://xmlns.oracle.com/weblogic/security/providers/passwordvalidator">
+    <name>ecare_dev</name>
+    <realm>
+      <sec:authentication-provider xsi:type="wls:default-authenticatorType"/>
+      <sec:authentication-provider xsi:type="wls:default-identity-asserterType">
+        <sec:active-type>AuthenticatedUser</sec:active-type>
+      </sec:authentication-provider>
+      <sec:role-mapper xsi:type="xacml:xacml-role-mapperType"/>
+      <sec:authorizer xsi:type="xacml:xacml-authorizerType"/>
+      <sec:adjudicator xsi:type="wls:default-adjudicatorType"/>
+      <sec:credential-mapper xsi:type="wls:default-credential-mapperType"/>
+      <sec:cert-path-provider xsi:type="wls:web-logic-cert-path-providerType"/>
+      <sec:cert-path-builder>WebLogicCertPathProvider</sec:cert-path-builder>
+      <sec:name>myrealm</sec:name>
+      <sec:password-validator xsi:type="pas:system-password-validatorType">
+        <sec:name>SystemPasswordValidator</sec:name>
+        <pas:min-password-length>8</pas:min-password-length>
+        <pas:min-numeric-or-special-characters>1</pas:min-numeric-or-special-characters>
+      </sec:password-validator>
+    </realm>
+    <default-realm>myrealm</default-realm>
+    <credential-encrypted>{AES}zX3mx1owtiD66TsJTUL0M1rrgCakp//t8CTcgKZ7wChuqz0LQneSFKSIRIZWO61HqWxp1Egq91C06lSoh//TzV8li/tUsTH01SddySr/2TH+c5U4eJnxLUD8BzMUy+Rc</credential-encrypted>
+    <node-manager-username>AR6h4VU5Uz</node-manager-username>
+    <node-manager-password-encrypted>{AES}RbNrLTgzlTS/4pkUgBEBjCCPvcYgkmo4vt1WmsnwlCo=</node-manager-password-encrypted>
+  </security-configuration>
+  <server>
+    <name>AdminServer</name>
+    <listen-port>10001</listen-port>
+    <listen-address/>
+  </server>
+  <production-mode-enabled>true</production-mode-enabled>
+  <embedded-ldap>
+    <name>ecare_dev</name>
+    <credential-encrypted>{AES}GBZqR6YlM1pF6rPy6AVp1U0n8FbHkc3iP5mU3cJfFU1VNn6t/R0LEfozBehaNirN</credential-encrypted>
+  </embedded-ldap>
+  <configuration-version>12.1.1.0</configuration-version>
+  <admin-server-name>AdminServer</admin-server-name>
+</domain>

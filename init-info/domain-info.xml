@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-info javahome="C:\Program Files\Java\jrockit-jdk1.6.0_37-R28.2.5-4.1.0" appdir="" mwhome="C:\Oracle\Middleware" xmlns="http://xmlns.oracle.com/weblogic/domain-info">
+  <domain-template-ref name="Basic WebLogic Server Domain" version="12.1.1.0" location="C:\Oracle\Middleware\wlserver_12.1\common\templates\domains\wls.jar" symbol="WebLogic_Server_12.1.1.0_wlserver_12.1_ORACLE_HOME"/>
+  <install-comp-ref name="WebLogic Server" version="12.1.1.0" symbol="WebLogic_Server_12.1.1.0_wlserver_12.1_ORACLE_HOME" product_home="C:\Oracle\Middleware\wlserver_12.1"/>
+</domain-info>
